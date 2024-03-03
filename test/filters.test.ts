@@ -9,6 +9,6 @@ describe("customers", () => {
 
 describe("filters", () => {
     it("createFilters ", () => {
-        expect(createFilters(5)).toEqual([]);
+        expect(createFilters(customers, 5)).toEqual([]);
     });
 });

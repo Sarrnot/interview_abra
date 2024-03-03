@@ -1,38 +1,35 @@
 import TreeNode from "./DataStructure/TreeNode";
-import { customers } from "./api/customers";
 import Customer from "./types/Customer";
 
-export const createFilters = (filterCount: number) => {
-    return [];
-};
-
-const createPostalCodeTree = (customers: Customer[]) => {
+export const createFilters = (customers: Customer[], filterCount: number) => {
     const postalCodes = customers.map((customer) =>
         customer.psc.replace(/ /g, "")
     );
 
+    const tree = createTree(postalCodes);
+
+    return [];
+};
+
+const createTree = (values: string[]) => {
     const root = new TreeNode("");
 
-    postalCodes.forEach((code) => {
+    values.forEach((value) => {
         let currentNode = root;
 
         currentNode.entriesCount += 1;
 
-        for (let i = 0; i < code.length; i++) {
-            const value = code[i];
+        for (let i = 0; i < value.length; i++) {
+            const char = value[i];
 
-            let nextNode = currentNode.children.find(
-                (child) => child.value === value
-            );
-
-            if (!nextNode) {
-                nextNode = new TreeNode(value);
-                currentNode.addChild(nextNode);
-            }
+            const nextNode = currentNode.addChild(char);
 
             currentNode.childrenEntriesCount += 1;
             nextNode.entriesCount += 1;
+
             currentNode = nextNode;
         }
     });
+
+    return root;
 };

@@ -1,6 +1,9 @@
 import TreeNode from "./DataStructure/TreeNode";
 import Customer from "./types/Customer";
 
+export const getPostalCodes = (customers: Customer[]) =>
+    customers.map((customer) => customer.psc.replace(/ /g, ""));
+
 const createTree = (values: string[]) => {
     const root = new TreeNode("");
 
@@ -65,9 +68,7 @@ const findFilterNodes = (root: TreeNode<string>, filterCount: number) => {
 };
 
 export const createFilters = (customers: Customer[], filterCount: number) => {
-    const postalCodes = customers.map((customer) =>
-        customer.psc.replace(/ /g, "")
-    );
+    const postalCodes = getPostalCodes(customers);
     const root = createTree(postalCodes);
     const filterNodes = findFilterNodes(root, filterCount);
     const filters: string[] = filterNodes.map((node) => node.value);

@@ -1,3 +1,4 @@
+// Pridani potrebneho TS typu, super!
 type Customer = {
     id: number;
     kod: string;

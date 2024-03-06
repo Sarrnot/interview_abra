@@ -32,6 +32,8 @@ const findFilterNodes = (root: TreeNode<string>, filterCount: number) => {
     const unsplittableNodes: TreeNode<string>[] = [];
     const nodesCount = () => splittableNodes.length + unsplittableNodes.length;
 
+    // Mam podezreni, ze tyto vypocty nefunguji moc dobre, viz testy, 
+    // ktere jsem pridaval - vznika vzdy prazdny, nebo dva stejne filtry.
     while (splittableNodes.length > 0) {
         if (nodesCount() === filterCount) break;
 
@@ -67,6 +69,10 @@ const findFilterNodes = (root: TreeNode<string>, filterCount: number) => {
     return [...splittableNodes, ...unsplittableNodes];
 };
 
+// Chybi navratovy typ. Je to skoda, kdyz uz jsou typy u parametru.
+//
+// Podle testu je vysledkem Array<string>. Sel by takovy filtr pozdeji pouzit v aplikaci
+// pro filtrovani tabulky?
 export const createFilters = (customers: Customer[], filterCount: number) => {
     const postalCodes = getPostalCodes(customers);
     const root = createTree(postalCodes);

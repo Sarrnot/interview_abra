@@ -52,9 +52,50 @@ describe("filters", () => {
             for (let i = 0; i < filters.length; i++) {
                 for (let j = 0; i < filters.length; i++) {
                     if (i === j) continue;
+                     // Funkci "fail()" jsme neznal, diky.
                     if (filters[i].includes(filters[j])) fail();
                 }
             }
         });
     });
 });
+
+describe("review", () => {
+    // Pridavam testy, ktere ukazuji problem algoritmu vytvareni filtru.
+    // Filtr budto vznikne jeden prazdny, nebo dva.
+    describe("createFilters()", () => {
+      let filters = [];
+      let expectedFilters = [];
+  
+      it("filterCount -1", () => {
+        filters = createFilters(customers, -1);
+        expectedFilters = [""];
+        expect(filters).toEqual(expectedFilters);
+      });
+      it("filterCount 1", () => {
+        filters = createFilters(customers, 1);
+        expectedFilters = [""];
+        expect(filters).toEqual(expectedFilters);
+      });
+      it("filterCount 2", () => {
+        filters = createFilters(customers, 2);
+        expectedFilters = ["3", "1"];
+        expect(filters).toEqual(expectedFilters);
+      });
+      it("filterCount 3", () => {
+        filters = createFilters(customers, 3);
+        expectedFilters = ["1", "3"]; // Proc jen dva?
+        expect(filters).toEqual(expectedFilters);
+      });
+      it("filterCount 4", () => {
+        filters = createFilters(customers, 4);
+        expectedFilters = ["1", "3"]; // Proc jen dva?
+        expect(filters).toEqual(expectedFilters);
+      });
+      it("filterCount 5", () => {
+        filters = createFilters(customers, 5);
+        expectedFilters = ["1", "3"]; // Proc jen dva?
+        expect(filters).toEqual(expectedFilters);
+      });
+    });
+  });
